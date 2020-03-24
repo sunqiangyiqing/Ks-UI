@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <div class="row">
+    <!-- <div class="row">
       <ks-button @click="fn" type="primary">按钮</ks-button>
       <ks-button type="success">按钮</ks-button>
       <ks-button type="info">按钮</ks-button>
@@ -38,19 +38,24 @@
     </div>
     <div>
      
-    </div>
+    </div> -->
     <!-- <ks-dialog title="温馨提示"></ks-dialog> -->
     <!-- <ks-dialog v-slot:title>
       <h3>我是标题</h3>
     </ks-dialog> -->
-    <ks-button @click="visible=true">显示</ks-button>
+    <!-- <ks-button @click="visible=true">显示</ks-button>
     <ks-dialog width="40%" top="300px" :visible.sync="visible">
       1122
       <template v-slot:footer>
-        <ks-button  @click="visible=false">取消</ks-button>
-        <ks-button type="primary"  @click="visible=false">确定</ks-button>
+        <ks-button  @click="visible=false">取消</template>
+        <ks-button type="primary"  @click="visible=false">确定</template>
       </template>
-    </ks-dialog>
+    </ks-dialog> -->
+
+    <ks-input placeholder="请输入信息" v-model="username" clearable ></ks-input>
+    <ks-input placeholder="请输入信息" type="password" v-model="username" show-password></ks-input>
+    <!-- <ks-input placeholder="请输入信息" type="password" v-model="username"></ks-input> -->
+    
   </div>
 </template>
 
@@ -60,7 +65,7 @@
 export default {
   data() {
     return {
-      visible:false
+      username:'ss'
     }
   },
  methods: {
@@ -77,6 +82,9 @@ export default {
   .ks-button {
     margin-right: 20px;
   }
+}
+.ks-input{
+  width: 180px;
 }
 
 </style>
