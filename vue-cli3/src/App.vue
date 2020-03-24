@@ -52,10 +52,11 @@
       </template>
     </ks-dialog> -->
 
-    <ks-input placeholder="请输入信息" v-model="username" clearable ></ks-input>
-    <ks-input placeholder="请输入信息" type="password" v-model="username" show-password></ks-input>
+    <!-- <ks-input placeholder="请输入信息" v-model="username" clearable ></ks-input>
+    <ks-input placeholder="请输入信息" type="password" v-model="username" show-password></ks-input> -->
     <!-- <ks-input placeholder="请输入信息" type="password" v-model="username"></ks-input> -->
-    
+    <!-- <ks-switch v-model="active"></ks-switch> -->
+    <!-- <ks-switch v-model="active" active-color="#13ce66" inactive-color="green" name="username"></ks-switch> -->
   </div>
 </template>
 
@@ -65,7 +66,8 @@
 export default {
   data() {
     return {
-      username:'ss'
+      username:'ss',
+      active:false
     }
   },
  methods: {
