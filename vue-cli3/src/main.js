@@ -4,6 +4,8 @@ import KsButton from './components/button.vue'
 import KsDialog from './components/dialog.vue'
 import KsInput from './components/input.vue'
 import KsSwitch from './components/switch.vue'
+import KsRadio from './components/radio.vue'
+import KsInputgroup from './components/input-group.vue'
 Vue.config.productionTip = false
 import "./assets/font.scss"
 
@@ -11,6 +13,8 @@ Vue.component(KsButton.name, KsButton)
 Vue.component(KsDialog.name, KsDialog)
 Vue.component(KsInput.name, KsInput)
 Vue.component(KsSwitch.name, KsSwitch)
+Vue.component(KsRadio.name, KsRadio)
+Vue.component(KsInputgroup.name, KsInputgroup)
 
 new Vue({
   render: h => h(App)

@@ -36,10 +36,6 @@ export default {
   methods: {
     async handleClick () {
       this.$emit('input', !this.value)
-      // 点击的时候，还需要修改背景色
-      // console.log(this.value)
-      // 等待value发生了改变，在setColor
-      // 数据修改后，等待DOM更新，在修改按钮的颜色
       await this.$nextTick()
       this.setColor()
       this.$refs.input.checked = this.value

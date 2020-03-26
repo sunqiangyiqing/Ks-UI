@@ -51,9 +51,10 @@
         <ks-button type="primary"  @click="visible=false">确定</template>
       </template>
     </ks-dialog> -->
-
-    <!-- <ks-input placeholder="请输入信息" v-model="username" clearable ></ks-input>
-    <ks-input placeholder="请输入信息" type="password" v-model="username" show-password></ks-input> -->
+    <ks-inputgroup class="aa" @click="handelselect">
+      <ks-input placeholder="请输入信息" v-model="username" clearable ref="inputs"></ks-input>
+      <ks-input placeholder="请输入信息" type="password" v-model="username" show-password @focus='fn'></ks-input>
+    </ks-inputgroup>
     <!-- <ks-input placeholder="请输入信息" type="password" v-model="username"></ks-input> -->
     <!-- <ks-switch v-model="active"></ks-switch> -->
     <!-- <ks-switch v-model="active" active-color="#13ce66" inactive-color="green" name="username"></ks-switch> -->
@@ -70,11 +71,18 @@ export default {
       active:false
     }
   },
+  mounted() {
+    // console.log(this.$children[0])
+  },
  methods: {
    fn(){
-    //  console.log('123');
+     console.log('123');
    },
- },
+   handelselect(){
+     console.log(this.$refs.inputs[0])
+   }
+ }
+ 
 }
 </script>
 

@@ -1,0 +1,100 @@
+<template>
+  <label calss="ks-radio">
+      <span class="ks-radio__input">
+          <span class="ks-radio__inner"></span>
+          <input 
+            calss="ks-radio__original"
+            type="radio"
+          >
+      </span>
+      <span class="ks-radio__label">
+          121
+      </span>
+  </label>
+</template>
+
+<script>
+export default {
+  name:'KsRadio'
+}
+</script>
+
+<style lang="scss">
+  .ks-radio {
+  color: #606266;
+  font-weight: 500;
+  line-height: 1;
+  position: relative;
+  cursor: pointer;
+  display: inline-block;
+  white-space: nowrap;
+  outline: none;
+  font-size: 14px;
+  margin-right: 30px;
+  -moz-user-select: none;
+  -webkit-user-select: none;
+  -ms-user-select: none;
+  .ks-radio__input {
+    white-space: nowrap;
+    cursor: pointer;
+    outline: none;
+    display: inline-block;
+    line-height: 1;
+    position: relative;
+    vertical-align: middle;
+    .ks-radio__inner {
+      border: 1px solid #dcdfe6;
+      border-radius: 100%;
+      width: 14px;
+      height: 14px;
+      background-color: #fff;
+      position: relative;
+      cursor: pointer;
+      display: inline-block;
+      box-sizing: border-box;
+      &:after {
+        width: 4px;
+        height: 4px;
+        border-radius: 100%;
+        background-color: #fff;
+        content: "";
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%,-50%) scale(0);
+        transition: transform .15s ease-in;
+      }
+    }
+    .ks-radio__original {
+      opacity: 0;
+      outline: none;
+      position: absolute;
+      z-index: -1;
+      top: 0;
+      left: 0px;
+      right: 0;
+      bottom: 0;
+      margin: 0;
+    }
+  }
+  .ks-radio__label {
+    font-size: 14px;
+    padding-left: 10px;
+  }
+}
+
+.ks-radio.is-checked {
+  .ks-radio__input {
+    .ks-radio__inner {
+      border-color: #409eff;
+      background: #409eff;
+      &:after {
+        transform: translate(-50%,-50%) scale(1);
+      }
+    }
+  }
+  .ks-radio__label {
+    color: #409eff;
+  }
+}
+</style>

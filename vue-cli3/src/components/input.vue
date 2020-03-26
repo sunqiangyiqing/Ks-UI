@@ -9,7 +9,11 @@
       :name="name"
       :disabled="disabled"
       :value="value"
+      ref="input"
       @input="handleInput"
+      @focus="handleFocus"
+      @blur="handleBlur"
+      @change="handleChange"
     >
     <span class="ks-input__suffix" v-if="showSuffix">
       <i class="ks-input__icon ks-icon-circle-close" v-if="clearable && value" @click="clear"></i>
@@ -25,10 +29,12 @@
 <script>
 export default {
   name: 'ksInput',
+  inject:['datas'],
   data () {
     return {
       // 用于控制是否显示密码框
-      passwordVisible: false
+      passwordVisible: false,
+      focused:false
     }
   },
   props: {
@@ -49,7 +55,7 @@ export default {
       default: false
     },
     value: {
-      type: String,
+      type: [String,Number],
       default: ''
     },
     clearable: {
@@ -63,20 +69,45 @@ export default {
   },
   computed: {
     showSuffix () {
-      return this.clearable || this.showPassword
+      return this.clearable || this.showPassword;
     }
   },
   methods: {
+    focus(){
+      this.getInput().focus();
+      // console.log(1111);
+    },
+    blur(){
+      this.getInput().blur();
+    },
     handleInput (e) {
-      this.$emit('input', e.target.value)
+      this.$emit('input', e.target.value);
+    },
+    handleBlur(event){
+      this.focused = false;
+      this.$emit('blur', event)
     },
     clear () {
       // 把内容清空
-      this.$emit('input', '')
+      this.$emit('input', '');
+      this.$emit('change', '');
+      this.$emit('clear', '');
     },
     handlePassword () {
-      this.passwordVisible = !this.passwordVisible
+      this.passwordVisible = !this.passwordVisible;
+    },
+    handleFocus(event){
+      this.focused = true;
+      this.$emit('focus', event);
+      // console.log(this.$parent.name);
+    },
+    getInput(){
+      return this.$refs.input;
+    },
+    handleChange(event){
+      this.$emit('change' ,event.target.value)
     }
+    
   }
 }
 </script>
