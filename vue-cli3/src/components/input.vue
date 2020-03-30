@@ -1,5 +1,8 @@
 <template>
-  <div class="ks-input" :class="{'ks-input--suffix': showSuffix}">
+  <div 
+    class="ks-input" 
+    :class="{'ks-input--suffix': showSuffix,}"
+  >
     <!-- 如果传了show-password, 判断是否需要切换 密码的显示 如果不传，不判断 -->
     <input
       class="ks-input__inner"
@@ -9,6 +12,8 @@
       :name="name"
       :disabled="disabled"
       :value="value"
+      :autocomplete="autocomplete || autoComplete"
+      :readonly='readonly'
       ref="input"
       @input="handleInput"
       @focus="handleFocus"
@@ -29,7 +34,15 @@
 <script>
 export default {
   name: 'ksInput',
-  inject:['datas'],
+  componentName:"KsInput",
+  inject:{
+   ksForm:{
+     default:""
+   },
+   ksFormItem:{
+     default:""
+   }
+  },
   data () {
     return {
       // 用于控制是否显示密码框
@@ -65,11 +78,38 @@ export default {
     showPassword: {
       type: Boolean,
       default: false
+    },
+    validateEvent:{
+      type: Boolean,
+      default:true
+    },
+    autoszie:{
+      type:[Boolean, Object],
+      default: false
+    },
+    autocomplete:{
+      type:String,
+      default:'off'
+    },
+    readonly:{
+      type:Boolean,
+      default: false
     }
+  },
+  watch: {
+    // value(val){
+    //   this.$nextTick(this.resizeTextarea);
+    //   if(this.validateEvent){
+    //     this.despatch('ksFromItem', 'ks.from.change', [val])
+    //   }
+    // }
   },
   computed: {
     showSuffix () {
       return this.clearable || this.showPassword;
+    },
+    inputSize () {
+      return this.size
     }
   },
   methods: {
@@ -80,34 +120,48 @@ export default {
     blur(){
       this.getInput().blur();
     },
+    //选中input中的文字
+    sksect(){
+      this.getInput().sksect();
+      // console.log(222);
+    },
     handleInput (e) {
       this.$emit('input', e.target.value);
     },
-    handleBlur(event){
+    handleBlur(e){
       this.focused = false;
-      this.$emit('blur', event)
+      this.$emit('blur', e)
     },
     clear () {
       // 把内容清空
       this.$emit('input', '');
       this.$emit('change', '');
       this.$emit('clear', '');
+      return this.clearable && !this.readonly;
     },
     handlePassword () {
       this.passwordVisible = !this.passwordVisible;
     },
-    handleFocus(event){
+    handleFocus(e){
       this.focused = true;
-      this.$emit('focus', event);
+      this.$emit('focus', e);
       // console.log(this.$parent.name);
     },
     getInput(){
       return this.$refs.input;
     },
-    handleChange(event){
-      this.$emit('change' ,event.target.value)
+    handleChange(e){
+      this.$emit('change' ,e.target.value)
+    },
+    //判断 是否执行服务端渲染
+    resizeTextarea(){
+      if(this.$isServer) return;
+      // const { autosiae, type} = this
     }
     
+  },
+  created(){
+    this.$on('inputSksect', this.sksect);
   }
 }
 </script>

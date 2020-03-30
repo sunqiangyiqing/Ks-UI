@@ -6,6 +6,7 @@ import KsInput from './components/input.vue'
 import KsSwitch from './components/switch.vue'
 import KsRadio from './components/radio.vue'
 import KsInputgroup from './components/input-group.vue'
+import ElForm from './components/form.vue'
 Vue.config.productionTip = false
 import "./assets/font.scss"
 
@@ -15,6 +16,7 @@ Vue.component(KsInput.name, KsInput)
 Vue.component(KsSwitch.name, KsSwitch)
 Vue.component(KsRadio.name, KsRadio)
 Vue.component(KsInputgroup.name, KsInputgroup)
+Vue.component(ElForm.name, ElForm)
 
 new Vue({
   render: h => h(App)

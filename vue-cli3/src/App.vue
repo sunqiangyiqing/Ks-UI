@@ -51,13 +51,16 @@
         <ks-button type="primary"  @click="visible=false">确定</template>
       </template>
     </ks-dialog> -->
-    <ks-inputgroup class="aa" @click="handelselect">
+    <!-- <ks-inputgroup class="aa" @click="handelselect">
       <ks-input placeholder="请输入信息" v-model="username" clearable ref="inputs"></ks-input>
-      <ks-input placeholder="请输入信息" type="password" v-model="username" show-password @focus='fn'></ks-input>
-    </ks-inputgroup>
+      <ks-input placeholder="请输入信息" type="password" v-model="aa" show-password ></ks-input>
+    </ks-inputgroup> -->
     <!-- <ks-input placeholder="请输入信息" type="password" v-model="username"></ks-input> -->
     <!-- <ks-switch v-model="active"></ks-switch> -->
     <!-- <ks-switch v-model="active" active-color="#13ce66" inactive-color="green" name="username"></ks-switch> -->
+    <el-form>
+      <slot>wwww</slot>
+    </el-form>
   </div>
 </template>
 
@@ -67,8 +70,9 @@
 export default {
   data() {
     return {
-      username:'ss',
-      active:false
+      username:'',
+      active:false,
+      aa:''
     }
   },
   mounted() {
@@ -76,10 +80,10 @@ export default {
   },
  methods: {
    fn(){
-     console.log('123');
+    //  console.log('123');
    },
    handelselect(){
-     console.log(this.$refs.inputs[0])
+    //  console.log(this.$refs.inputs[0])
    }
  }
  
