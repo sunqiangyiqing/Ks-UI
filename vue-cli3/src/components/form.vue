@@ -11,6 +11,7 @@ import objectAssign from '../../src/utils/merge';
 export default {
   name:'ElForm',
   componentName:'ElForm',
+  //注入组件实例
   provide(){
       return{
           elForm:this
@@ -79,17 +80,18 @@ export default {
   data() {
       return {
           fields:[],
+          //使用此数组计算自使用宽度
           potentialLabelWidthArr:[]
       }
   },
   created() {
-          // 接收子组件添加rule验证事件
+          // 接收子组件添加rule验证事件,监听el.form.addField事件，触发；将form-item实例push到fields
       this.$on('el.form.addField', (field)=>{
           if(field.prop){
               this.fields.push(field);
           }
       });
-         //删除事件监听
+         //删除事件监听，监听el.form.addField事件，触发；将form-item实例有prop规则属性从fields移除form-item实例
       this.$on('el.form.removeField', (field)=>{
           if(field.prop){
               this.fields.splice(this.fields.indexOf(field),1);
@@ -121,6 +123,7 @@ export default {
       //该回调函数会在校验结束后被调用，并传入两个参数：是否校验成功和未通过校验的字段。
       //若不传入回调函数，则会返回一个 promise
       validate(callback) {
+        //如果没有表单数据，则抛出警告
         if (!this.model) {
           console.warn('222');
           return;
@@ -143,11 +146,14 @@ export default {
           callback(true);
         }
         let invalidFields = {};
+        //遍历所有实例，一个个验证
         this.fields.forEach(field => {
           field.validate('', (message, field) => {
+            //如果有返回信息，则说明验证失败
             if (message) {
               valid = false;
             }
+            //将错误对象复制到invalidFields
             invalidFields = objectAssign({}, invalidFields, field);
             if (typeof callback === 'function' && ++count === this.fields.length) {
               callback(valid, invalidFields);
@@ -159,7 +165,42 @@ export default {
           return promise;
         }
       },
-  
+      //对部分表单进行验证
+      validateField(props, cb){
+        props = [].concat(props);
+        const fields = this.fields.filter(field => props.indexOf(field.prop) !== -1);
+        if(!fields.length){
+          console.warn("qusiba")
+          return
+        }
+     //验证对应规则的表单 
+        fields.forEach(field=>{
+          field.validate("", cb);
+        })
+      },
+      //获取label下标
+      getLableWidthIindex(width){
+        const index = this.potentialLabelWidthArr.indexOf(width);
+        if(index == -1){
+          //自定义错误
+          throw new Error('[ElementForm]unpected width', width)
+        }
+        return index
+      },
+      //重置LabelWidth
+      registerLabelWidth(val, oldVal){
+         if(val && oldVal){
+           const index = this.getLableWidthIindex(oldVal);
+           this.potentialLabelWidthArr.splice(index, 1, val);
+         }else if(val){
+           this.potentialLabelWidthArr.push(val);
+         }
+      },
+      //移除此宽度
+      deregisterLabelWidth(val){
+          const index = this.getLableWidthIindex(val);
+          this.potentialLabelWidthArr.splice(index, 1);
+      }
   },
  
 }

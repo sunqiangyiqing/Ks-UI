@@ -35,14 +35,20 @@
 export default {
   name: 'ksInput',
   componentName:"KsInput",
-  inject:{
-   ksForm:{
-     default:""
-   },
-   ksFormItem:{
-     default:""
-   }
-  },
+//   inject: {
+//   setChildrenRef: {
+//     default: () => {}
+//   },
+//   getParentRef: {
+//     from: "getRef",
+//     default: () => {}
+//   },
+//   getParentChildrenRef: {
+//     from: "getChildrenRef",
+//     default: () => {}
+//   }
+// },
+
   data () {
     return {
       // 用于控制是否显示密码框
@@ -50,6 +56,7 @@ export default {
       focused:false
     }
   },
+ 
   props: {
     placeholder: {
       type: String,
@@ -115,7 +122,7 @@ export default {
   methods: {
     focus(){
       this.getInput().focus();
-      // console.log(1111);
+
     },
     blur(){
       this.getInput().blur();

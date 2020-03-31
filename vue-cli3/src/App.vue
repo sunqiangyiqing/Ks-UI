@@ -51,16 +51,22 @@
         <ks-button type="primary"  @click="visible=false">确定</template>
       </template>
     </ks-dialog> -->
-    <!-- <ks-inputgroup class="aa" @click="handelselect">
-      <ks-input placeholder="请输入信息" v-model="username" clearable ref="inputs"></ks-input>
-      <ks-input placeholder="请输入信息" type="password" v-model="aa" show-password ></ks-input>
-    </ks-inputgroup> -->
+    <div @click="handelselect">
+        <span>
+          <ks-input placeholder="请输入信息" v-model="username" clearable ref="inputs" value = "gtythyh"></ks-input>
+        </span>
+    </div>
     <!-- <ks-input placeholder="请输入信息" type="password" v-model="username"></ks-input> -->
     <!-- <ks-switch v-model="active"></ks-switch> -->
     <!-- <ks-switch v-model="active" active-color="#13ce66" inactive-color="green" name="username"></ks-switch> -->
-    <el-form>
+    <!-- <el-form>
       <slot>wwww</slot>
-    </el-form>
+    </el-form> -->
+    <!-- <div @click="handelselect">
+    <ks-input v-ant-ref="c => setKsInputRef('ksinputH', c)" />
+
+    <h3 v-ant-ref="c => setKsInputRef('ksinputE', c)">E 结点</h3>
+    </div> -->
   </div>
 </template>
 
@@ -75,16 +81,31 @@ export default {
       aa:''
     }
   },
-  mounted() {
-    // console.log(this.$children[0])
-  },
+//    provide() {
+//   return {
+//     //主动通知 将组件实例绑定在根组件上
+//     setChildrenRef: (name, ref) => {
+//       this[name] = ref;
+//     },
+//     //主动获取 获取绑定的组件
+//     getChildrenRef: name => {
+//       return this[name];
+//     },
+//     // 获取根组件
+//     getRef: () => {
+//       return this;
+//     }
+//   }
+// },
+
  methods: {
-   fn(){
-    //  console.log('123');
-   },
    handelselect(){
-    //  console.log(this.$refs.inputs[0])
-   }
+     console.log(this.$refs.inputs.value)
+    //  console.log(this.getParentRef())
+    //  console.log(this.getParentChildrenRef("childrenH"))
+    //  console.log(this.getParentChildrenRef("childrenE"))
+   },
+  
  }
  
 }

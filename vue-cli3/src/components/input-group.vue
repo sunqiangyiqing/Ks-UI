@@ -26,7 +26,7 @@ export default {
   },
   provide(){
       return{
-          datas:this.datas
+          datas:this
       }
   },
   props:
